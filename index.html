@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRC Screening Barriers Study — Journal Recommendations</title>
+<style>
+/* ===== CSS Reset & Variables ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f8f9fc;
+  --bg-card: #ffffff;
+  --bg-header: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  --text: #1a1a2e;
+  --text-muted: #6b7280;
+  --text-inverse: #f0f0f5;
+  --border: #e2e8f0;
+  --accent: #2563eb;
+  --accent-light: #dbeafe;
+  --tier1: #059669;
+  --tier1-bg: #ecfdf5;
+  --tier1-border: #a7f3d0;
+  --tier2: #d97706;
+  --tier2-bg: #fffbeb;
+  --tier2-border: #fde68a;
+  --tier3: #7c3aed;
+  --tier3-bg: #f5f3ff;
+  --tier3-border: #c4b5fd;
+  --tier4: #0891b2;
+  --tier4-bg: #ecfeff;
+  --tier4-border: #a5f3fc;
+  --avoid: #dc2626;
+  --avoid-bg: #fef2f2;
+  --avoid-border: #fecaca;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-header: linear-gradient(135deg, #0c1524 0%, #162033 50%, #1a3a4a 100%);
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-inverse: #f0f0f5;
+  --border: #334155;
+  --accent: #60a5fa;
+  --accent-light: #1e3a5f;
+  --tier1-bg: #064e3b;
+  --tier1-border: #065f46;
+  --tier2-bg: #451a03;
+  --tier2-border: #78350f;
+  --tier3-bg: #2e1065;
+  --tier3-border: #4c1d95;
+  --tier4-bg: #083344;
+  --tier4-border: #155e75;
+  --avoid-bg: #450a0a;
+  --avoid-border: #7f1d1d;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+/* ===== Base ===== */
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ===== Header ===== */
+.hero {
+  background: var(--bg-header);
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(14, 165, 233, 0.1) 0%, transparent 60%);
+  animation: heroGlow 8s ease-in-out infinite alternate;
+}
+@keyframes heroGlow {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-3%, 2%) scale(1.05); }
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+.hero h1 {
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--text-inverse);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.hero .subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: rgba(240, 240, 245, 0.75);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: rgba(240, 240, 245, 0.6);
+}
+.hero-meta span { display: flex; align-items: center; gap: 0.35rem; }
+
+/* ===== Theme Toggle ===== */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition);
+  font-size: 1.2rem;
+}
+.theme-toggle:hover { transform: scale(1.1); box-shadow: var(--shadow-lg); }
+
+/* ===== Navigation ===== */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-bar::-webkit-scrollbar { height: 0; }
+.nav-inner {
+  display: flex;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-width: max-content;
+}
+.nav-link {
+  padding: 0.85rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2.5px solid transparent;
+  transition: all var(--transition);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* ===== Section ===== */
+.section { margin-bottom: 2.5rem; }
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+.section-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.section-header h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.section-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+}
+
+/* ===== Context Card ===== */
+.context-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+}
+.context-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.context-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.criteria-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid transparent;
+}
+.pill.green { background: var(--tier1-bg); color: var(--tier1); }
+.pill.red { background: var(--avoid-bg); color: var(--avoid); }
+
+/* ===== Tier Tabs ===== */
+.tier-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.tier-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  transition: all var(--transition);
+}
+.tier-tab:hover { border-color: var(--text-muted); }
+.tier-tab.active-all { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.tier-tab.active-t1 { border-color: var(--tier1); color: var(--tier1); background: var(--tier1-bg); }
+.tier-tab.active-t2 { border-color: var(--tier2); color: var(--tier2); background: var(--tier2-bg); }
+.tier-tab.active-t3 { border-color: var(--tier3); color: var(--tier3); background: var(--tier3-bg); }
+.tier-tab.active-t4 { border-color: var(--tier4); color: var(--tier4); background: var(--tier4-bg); }
+
+/* ===== Search ===== */
+.search-box {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.search-box input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: all var(--transition);
+}
+.search-box input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+.search-box .search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ===== Table ===== */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  background: var(--bg-card);
+}
+thead { position: sticky; top: 0; z-index: 5; }
+thead th {
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border);
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+thead th:hover { color: var(--accent); }
+thead th .sort-arrow { margin-left: 0.3rem; font-size: 0.7rem; opacity: 0.4; }
+thead th.sorted .sort-arrow { opacity: 1; color: var(--accent); }
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--accent-light); }
+tbody td { padding: 0.75rem 1rem; vertical-align: top; }
+td.rank {
+  font-weight: 800;
+  text-align: center;
+  width: 40px;
+  color: var(--text-muted);
+}
+td.journal-name { font-weight: 600; min-width: 180px; }
+td.publisher { color: var(--text-muted); white-space: nowrap; }
+td.indexing {
+  white-space: nowrap;
+}
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.badge-medline { background: #dbeafe; color: #1d4ed8; }
+.badge-pmc { background: #e0e7ff; color: #4338ca; }
+.badge-pubmed { background: #ede9fe; color: #6d28d9; }
+[data-theme="dark"] .badge-medline { background: #1e3a5f; color: #93c5fd; }
+[data-theme="dark"] .badge-pmc { background: #312e81; color: #a5b4fc; }
+[data-theme="dark"] .badge-pubmed { background: #3b0764; color: #c4b5fd; }
+
+td.notes {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+/* Tier stripe on left */
+tbody tr[data-tier="1"] td:first-child { box-shadow: inset 4px 0 0 var(--tier1); }
+tbody tr[data-tier="2"] td:first-child { box-shadow: inset 4px 0 0 var(--tier2); }
+tbody tr[data-tier="3"] td:first-child { box-shadow: inset 4px 0 0 var(--tier3); }
+tbody tr[data-tier="4"] td:first-child { box-shadow: inset 4px 0 0 var(--tier4); }
+
+/* ===== Cascade ===== */
+.cascade {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.cascade-step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: all var(--transition);
+}
+.cascade-step:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.cascade-step::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.cascade-step.step-1::before { background: var(--tier1); }
+.cascade-step.step-2::before { background: var(--tier2); }
+.cascade-step.step-3::before { background: var(--tier3); }
+.cascade-step.step-4::before { background: var(--tier4); }
+
+.step-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.step-1 .step-label { color: var(--tier1); }
+.step-2 .step-label { color: var(--tier2); }
+.step-3 .step-label { color: var(--tier3); }
+.step-4 .step-label { color: var(--tier4); }
+.step-journals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.step-journals .j-chip {
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+}
+.step-journals .j-chip:hover { border-color: var(--accent); color: var(--accent); }
+.cascade-arrow {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  margin: -0.3rem 0;
+}
+
+/* ===== Avoid List ===== */
+.avoid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.75rem;
+}
+.avoid-card {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--avoid-bg);
+  border: 1px solid var(--avoid-border);
+  border-radius: var(--radius-sm);
+  align-items: flex-start;
+}
+.avoid-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--avoid);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.avoid-info h4 { font-size: 0.88rem; font-weight: 700; color: var(--avoid); }
+.avoid-info p { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+/* ===== Stats Bar ===== */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hero { padding: 2rem 1rem 1.75rem; }
+  .container { padding: 1.25rem 0.75rem 3rem; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  thead th, tbody td { padding: 0.6rem 0.65rem; font-size: 0.8rem; }
+  td.notes { max-width: 200px; }
+  .avoid-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Animations ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  animation: fadeUp 0.5s ease-out both;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* Print */
+@media print {
+  .theme-toggle, .nav-bar, .search-box, .tier-tabs { display: none !important; }
+  .hero { background: #203a43 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 10pt; }
+}
+</style>
+</head>
+<body>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+  <span id="themeIcon">&#9790;</span>
+</button>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-content">
+    <h1>CRC Screening Barriers Study</h1>
+    <p class="subtitle">Journal Submission Recommendations &mdash; Ranked by Acceptance Likelihood</p>
+    <div class="hero-meta">
+      <span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg> Updated Feb 2026</span>
+      <span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> 30 PubMed-Indexed Journals</span>
+      <span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> KAP / Cross-Sectional Design</span>
+    </div>
+  </div>
+</header>
+
+<!-- Nav -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="#overview" class="nav-link active">Overview</a>
+    <a href="#rankings" class="nav-link">Top 30 Rankings</a>
+    <a href="#cascade" class="nav-link">Submission Cascade</a>
+    <a href="#avoid" class="nav-link">Journals to Avoid</a>
+  </div>
+</nav>
+
+<!-- Main -->
+<main class="container">
+
+  <!-- Overview -->
+  <section id="overview" class="section animate-in">
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-value">30</div>
+        <div class="stat-label">Journals Ranked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--tier1);">100%</div>
+        <div class="stat-label">PubMed Indexed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--tier2);">4</div>
+        <div class="stat-label">Cascade Tiers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--avoid);">10</div>
+        <div class="stat-label">Journals to Avoid</div>
+      </div>
+    </div>
+
+    <div class="context-card">
+      <h3>Selection Criteria</h3>
+      <p>Journals were selected and ranked for a <strong>KAP (Knowledge, Attitudes, Practices) cross-sectional study on colorectal cancer screening barriers</strong>. The primary goal is successful publication with PubMed indexing. Rankings prioritize realistic acceptance likelihood over impact factor.</p>
+      <div class="criteria-pills">
+        <span class="pill green">PubMed indexed</span>
+        <span class="pill green">Accepts KAP studies</span>
+        <span class="pill green">Scope match</span>
+        <span class="pill">Ranked by acceptance</span>
+        <span class="pill red">No Saudi journals</span>
+        <span class="pill red">No Cureus / APJCP / PLOS ONE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rankings -->
+  <section id="rankings" class="section animate-in delay-1">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--accent-light); color: var(--accent);">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      </div>
+      <h2>Top 30 Journal Rankings</h2>
+    </div>
+
+    <!-- Search -->
+    <div class="search-box">
+      <span class="search-icon">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </span>
+      <input type="text" id="searchInput" placeholder="Search journals, publishers..." oninput="filterTable()">
+    </div>
+
+    <!-- Tier Tabs -->
+    <div class="tier-tabs">
+      <button class="tier-tab active-all" onclick="filterTier('all', this)">All (30)</button>
+      <button class="tier-tab" onclick="filterTier('1', this)">Tier 1 &mdash; Highest (1-9)</button>
+      <button class="tier-tab" onclick="filterTier('2', this)">Tier 2 &mdash; High (10-18)</button>
+      <button class="tier-tab" onclick="filterTier('3', this)">Tier 3 &mdash; Moderate (19-24)</button>
+      <button class="tier-tab" onclick="filterTier('4', this)">Tier 4 &mdash; Stretch (25-30)</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table id="journalTable">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)" class="sorted" data-type="num"># <span class="sort-arrow">&#9650;</span></th>
+            <th onclick="sortTable(1)" data-type="str">Journal <span class="sort-arrow">&#9650;</span></th>
+            <th onclick="sortTable(2)" data-type="str">Publisher <span class="sort-arrow">&#9650;</span></th>
+            <th onclick="sortTable(3)" data-type="str">Indexing <span class="sort-arrow">&#9650;</span></th>
+            <th onclick="sortTable(4)" data-type="str">Acceptance Notes <span class="sort-arrow">&#9650;</span></th>
+          </tr>
+        </thead>
+        <tbody id="journalBody">
+        </tbody>
+      </table>
+    </div>
+    <p id="noResults" style="display:none; text-align:center; padding:2rem; color:var(--text-muted);">No journals match your search.</p>
+  </section>
+
+  <!-- Cascade -->
+  <section id="cascade" class="section animate-in delay-2">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--tier3-bg); color: var(--tier3);">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <h2>Recommended Submission Cascade</h2>
+    </div>
+    <p class="section-desc">If rejected from one tier, move to the next. Each tier contains journals of similar acceptance likelihood. This strategy maximizes your chances while targeting the highest-impact option first.</p>
+
+    <div class="cascade">
+      <div class="cascade-step step-1">
+        <div class="step-label">Tier 1 &mdash; Start Here (Highest Acceptance)</div>
+        <div class="step-journals">
+          <span class="j-chip">Medicine (Baltimore)</span>
+          <span class="j-chip">SAGE Open Medicine</span>
+          <span class="j-chip">Health Science Reports</span>
+        </div>
+      </div>
+      <div class="cascade-arrow">&#8595; if rejected</div>
+      <div class="cascade-step step-2">
+        <div class="step-label">Tier 2 &mdash; Strong Alternatives</div>
+        <div class="step-journals">
+          <span class="j-chip">J Multidiscip Healthcare</span>
+          <span class="j-chip">Healthcare (MDPI)</span>
+          <span class="j-chip">Medicina (MDPI)</span>
+          <span class="j-chip">JFMPC</span>
+        </div>
+      </div>
+      <div class="cascade-arrow">&#8595; if rejected</div>
+      <div class="cascade-step step-3">
+        <div class="step-label">Tier 3 &mdash; Solid Options</div>
+        <div class="step-journals">
+          <span class="j-chip">Ann Med Surg</span>
+          <span class="j-chip">CEGH</span>
+          <span class="j-chip">J Cancer Education</span>
+          <span class="j-chip">Cancer Control</span>
+        </div>
+      </div>
+      <div class="cascade-arrow">&#8595; if rejected</div>
+      <div class="cascade-step step-4">
+        <div class="step-label">Tier 4 &mdash; Safety Net</div>
+        <div class="step-journals">
+          <span class="j-chip">Qatar Med J</span>
+          <span class="j-chip">EMHJ</span>
+          <span class="j-chip">J Patient Experience</span>
+          <span class="j-chip">PeerJ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Avoid -->
+  <section id="avoid" class="section animate-in delay-3">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--avoid-bg); color: var(--avoid);">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+      </div>
+      <h2>Journals to Avoid</h2>
+    </div>
+    <p class="section-desc">These journals were excluded due to user preference, delisting, reputation concerns, or scope mismatch.</p>
+
+    <div class="avoid-grid" id="avoidGrid">
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>CRC Screening Barriers Study &mdash; Journal Recommendations &copy; 2026</p>
+  <p style="margin-top:0.3rem;">Abdullah M. Algarni, MBBS &middot; <a href="https://orcid.org/0000-0002-1477-4379" target="_blank" rel="noopener">ORCID</a></p>
+</footer>
+
+<script>
+// ===== Data =====
+const journals = [
+  {rank:1, name:"Medicine (Baltimore)", publisher:"Wolters Kluwer", indexing:"MEDLINE", tier:1, notes:"Mega-journal. ~80% acceptance rate. Publishes everything methodologically sound. Descriptive KAP = fine"},
+  {rank:2, name:"SAGE Open Medicine", publisher:"SAGE", indexing:"PMC", tier:1, notes:"Explicit policy: \u201cnot assessed on perceived impact.\u201d Reputable publisher. Very high acceptance"},
+  {rank:3, name:"Health Science Reports", publisher:"Wiley", indexing:"PMC", tier:1, notes:"Explicit policy: \u201cnot assessed on novelty or perceived impact.\u201d Published CRC KAP 2025"},
+  {rank:4, name:"Healthcare (Basel)", publisher:"MDPI", indexing:"PMC", tier:1, notes:"Very high acceptance rate. Published CRC screening from Asir 2025. Fast turnaround"},
+  {rank:5, name:"Medicina", publisher:"MDPI", indexing:"MEDLINE", tier:1, notes:"17 days median to first decision. Q1 General Medicine. High acceptance"},
+  {rank:6, name:"J Multidisciplinary Healthcare", publisher:"Dove Press (T&F)", indexing:"PMC", tier:1, notes:"Published near-identical Saudi CRC barriers study 2024. Fast review"},
+  {rank:7, name:"J Family Medicine & Primary Care", publisher:"Wolters Kluwer", indexing:"PMC", tier:1, notes:"Very high volume of KAP from Middle East. Fast review cycle"},
+  {rank:8, name:"Annals of Medicine and Surgery", publisher:"Wolters Kluwer", indexing:"PMC", tier:1, notes:"High acceptance rate. Broad scope. Cross-sectional surveys welcome"},
+  {rank:9, name:"Int\u2019l J General Medicine", publisher:"Dove Press (T&F)", indexing:"PMC", tier:1, notes:"Broad scope. Accepts KAP/community surveys readily"},
+  {rank:10, name:"Qatar Medical Journal", publisher:"QScience", indexing:"PMC", tier:2, notes:"Free. Gulf journal. Small journal = less competition"},
+  {rank:11, name:"Clinical Epidemiology & Global Health", publisher:"Elsevier", indexing:"PubMed", tier:2, notes:"KAP/cross-sectional = core article type. Developing country focus"},
+  {rank:12, name:"J Cancer Education", publisher:"Springer", indexing:"MEDLINE", tier:2, notes:"Core mission = cancer awareness/education. Perfect scope match"},
+  {rank:13, name:"Cancer Control", publisher:"SAGE", indexing:"MEDLINE", tier:2, notes:"Cancer prevention mission. Moffitt Cancer Center journal"},
+  {rank:14, name:"J Patient Experience", publisher:"SAGE", indexing:"PubMed", tier:2, notes:"Patient barriers to screening = natural fit. Reputable SAGE journal"},
+  {rank:15, name:"J Primary Care & Community Health", publisher:"SAGE", indexing:"PMC", tier:2, notes:"Community screening surveys. SAGE Open Access"},
+  {rank:16, name:"Eastern Mediterranean Health J", publisher:"WHO EMRO", indexing:"MEDLINE", tier:2, notes:"Free. WHO-backed. Loves EMR region KAP studies"},
+  {rank:17, name:"PeerJ", publisher:"PeerJ", indexing:"PMC", tier:2, notes:"Methodology-focused review, not novelty. Fast turnaround"},
+  {rank:18, name:"Patient Preference and Adherence", publisher:"Dove Press (T&F)", indexing:"PMC", tier:2, notes:"Screening adherence/patient barriers = strong scope fit"},
+  {rank:19, name:"Risk Management & Healthcare Policy", publisher:"Dove Press (T&F)", indexing:"PMC", tier:3, notes:"Public health policy angle. Frame around screening policy"},
+  {rank:20, name:"Health Education Research", publisher:"Oxford Univ Press", indexing:"MEDLINE", tier:3, notes:"Core scope = health education/behavior change"},
+  {rank:21, name:"J Clinical Medicine", publisher:"MDPI", indexing:"MEDLINE", tier:3, notes:"Large journal. Broad clinical scope. High throughput"},
+  {rank:22, name:"Preventive Medicine Reports", publisher:"Elsevier", indexing:"PMC", tier:3, notes:"Prevention-focused OA. Accepts descriptive studies"},
+  {rank:23, name:"Current Oncology", publisher:"MDPI", indexing:"PMC", tier:3, notes:"Published Saudi cancer screening barriers. Oncology frame needed"},
+  {rank:24, name:"Frontiers in Public Health", publisher:"Frontiers", indexing:"PMC", tier:3, notes:"Published Saudi CRC barriers 2025. ~50% acceptance rate"},
+  {rank:25, name:"BMC Gastroenterology", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, notes:"GI screening awareness. May want more analytical depth"},
+  {rank:26, name:"BMC Public Health", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, notes:"Published Saudi CRC KAP 2025. May request regression analysis"},
+  {rank:27, name:"J Community Health", publisher:"Springer", indexing:"MEDLINE", tier:4, notes:"Community screening studies. Competitive"},
+  {rank:28, name:"J Gastrointestinal Cancer", publisher:"Springer", indexing:"MEDLINE", tier:4, notes:"Moderate fit for screening barriers"},
+  {rank:29, name:"BMJ Open", publisher:"BMJ", indexing:"MEDLINE", tier:4, notes:"Rigorous methods review. May flag convenience sampling. Stretch target"},
+  {rank:30, name:"J Epidemiology & Global Health", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, notes:"High IF (3.1). Would need strong global health framing. Stretch"}
+];
+
+const avoidList = [
+  {name:"Cureus", reason:"Per user request"},
+  {name:"All Saudi journals", reason:"Per user request"},
+  {name:"APJCP", reason:"Per user request"},
+  {name:"PLOS ONE", reason:"Per user request"},
+  {name:"IJERPH (MDPI)", reason:"Delisted from Web of Science, Feb 2023"},
+  {name:"Heliyon (Elsevier)", reason:"On Web of Science hold, Sep 2024"},
+  {name:"J Oncology (Hindawi)", reason:"Closed Sep 2024; delisted from WoS"},
+  {name:"World J Clinical Cases", reason:"Baishideng \u2014 Beall\u2019s list; reputation risk"},
+  {name:"Int\u2019l J Colorectal Disease", reason:"Scope mismatch; clinical/surgical journal"},
+  {name:"Arch Med Sci \u2013 Civilization Diseases", reason:"Journal suspended"}
+];
+
+// ===== Render Table =====
+function renderTable(data) {
+  const tbody = document.getElementById('journalBody');
+  tbody.innerHTML = data.map(j => `
+    <tr data-tier="${j.tier}">
+      <td class="rank">${j.rank}</td>
+      <td class="journal-name">${j.name}</td>
+      <td class="publisher">${j.publisher}</td>
+      <td class="indexing"><span class="badge badge-${j.indexing.toLowerCase().replace(/\s/g,'')}">${j.indexing}</span></td>
+      <td class="notes">${j.notes}</td>
+    </tr>
+  `).join('');
+}
+
+// ===== Render Avoid =====
+function renderAvoid() {
+  const grid = document.getElementById('avoidGrid');
+  grid.innerHTML = avoidList.map(a => `
+    <div class="avoid-card">
+      <div class="avoid-icon">&times;</div>
+      <div class="avoid-info">
+        <h4>${a.name}</h4>
+        <p>${a.reason}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== Sorting =====
+let sortCol = 0;
+let sortAsc = true;
+
+function sortTable(col) {
+  const ths = document.querySelectorAll('#journalTable thead th');
+  const type = ths[col].dataset.type;
+
+  if (sortCol === col) { sortAsc = !sortAsc; }
+  else { sortCol = col; sortAsc = true; }
+
+  ths.forEach(th => th.classList.remove('sorted'));
+  ths[col].classList.add('sorted');
+  ths[col].querySelector('.sort-arrow').innerHTML = sortAsc ? '&#9650;' : '&#9660;';
+
+  const rows = Array.from(document.querySelectorAll('#journalBody tr'));
+  rows.sort((a, b) => {
+    let va = a.children[col].textContent.trim();
+    let vb = b.children[col].textContent.trim();
+    if (type === 'num') { va = parseInt(va); vb = parseInt(vb); }
+    else { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+    if (va < vb) return sortAsc ? -1 : 1;
+    if (va > vb) return sortAsc ? 1 : -1;
+    return 0;
+  });
+  const tbody = document.getElementById('journalBody');
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+// ===== Filter by Tier =====
+let activeTier = 'all';
+function filterTier(tier, btn) {
+  activeTier = tier;
+  // Update buttons
+  document.querySelectorAll('.tier-tab').forEach(b => {
+    b.className = 'tier-tab';
+  });
+  if (tier === 'all') btn.classList.add('active-all');
+  else btn.classList.add('active-t' + tier);
+
+  filterTable();
+}
+
+// ===== Search + Tier Filter =====
+function filterTable() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const rows = document.querySelectorAll('#journalBody tr');
+  let visible = 0;
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    const tier = row.dataset.tier;
+    const matchSearch = !query || text.includes(query);
+    const matchTier = activeTier === 'all' || tier === activeTier;
+    if (matchSearch && matchTier) {
+      row.style.display = '';
+      visible++;
+    } else {
+      row.style.display = 'none';
+    }
+  });
+  document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+}
+
+// ===== Theme =====
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeIcon').innerHTML = isDark ? '&#9790;' : '&#9728;';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+
+// Load saved theme
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('themeIcon').innerHTML = '&#9728;';
+  }
+})();
+
+// ===== Active Nav =====
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.nav-link');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const id = entry.target.id;
+      const link = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+
+// ===== Init =====
+renderTable(journals);
+renderAvoid();
+</script>
+
+</body>
+</html>
