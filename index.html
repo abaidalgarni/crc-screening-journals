@@ -546,13 +546,11 @@ footer a { color: var(--accent); text-decoration: none; }
 
     <div class="context-card">
       <h3>Selection Criteria</h3>
-      <p>Curated for a <strong>cross-sectional KAP study exploring colorectal cancer screening barriers</strong>. Journals are ranked by scope alignment and editorial accessibility, with all entries confirmed MEDLINE-indexed.</p>
+      <p>Journals ranked primarily by <strong>realistic acceptance likelihood</strong> rather than impact factor or prestige. All entries are confirmed MEDLINE-indexed and actively publishing as of February 2026.</p>
       <div class="criteria-pills">
         <span class="pill green">MEDLINE indexed</span>
-        <span class="pill green">Accepts KAP studies</span>
-        <span class="pill green">Scope match</span>
-        <span class="pill">Ranked by acceptance</span>
-        <span class="pill red">No Saudi journals</span>
+        <span class="pill green">Scope alignment</span>
+        <span class="pill">Ranked by acceptance likelihood</span>
       </div>
     </div>
   </section>
@@ -654,7 +652,7 @@ footer a { color: var(--accent); text-decoration: none; }
 <script>
 // ===== Data =====
 const journals = [
-  {rank:1, name:"Medicine (Baltimore)", publisher:"Wolters Kluwer", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/0413066", notes:"~53% acceptance. Mega-journal. Published Saudi CRC screening 2025. Soundness-based review"},
+  {rank:1, name:"Medicine (Baltimore)", publisher:"Wolters Kluwer", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/2985248R", notes:"~53% acceptance. Mega-journal. Published Saudi CRC screening 2025. Soundness-based review"},
   {rank:2, name:"Medicina (Kaunas)", publisher:"MDPI", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/9425208", notes:"17.5 days to first decision. High acceptance rate. MEDLINE since 2008"},
   {rank:3, name:"J Cancer Education", publisher:"Springer", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/8610343", notes:"Perfect scope = cancer education/KAP. $0 APC subscription model"},
   {rank:4, name:"Cancer Control", publisher:"SAGE", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/9438457", notes:"Cancer prevention mission. Moffitt Cancer Center journal. Published Saudi CRC"},
@@ -663,13 +661,13 @@ const journals = [
   {rank:7, name:"BMC Public Health", publisher:"Springer Nature", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/100968562", notes:"13 CRC KAP articles 2023-25. 2 Saudi papers. Soundness-based review"},
   {rank:8, name:"BMC Cancer", publisher:"Springer Nature", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/100967800", notes:"Soundness-based review. Broad cancer scope. High volume OA"},
   {rank:9, name:"Cancer Medicine", publisher:"Wiley", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101595310", notes:"Open access. Rapid publication. Broad oncology scope"},
-  {rank:10, name:"Frontiers in Oncology", publisher:"Frontiers", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101568867", notes:"4,797 articles in 2025. High volume = high acceptance"},
+  {rank:10, name:"Global Health Action", publisher:"Taylor & Francis", tier:1, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101496665", notes:"Open access. Broad global health scope. Publishes KAP and screening studies regularly"},
   {rank:11, name:"PeerJ", publisher:"PeerJ", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101603425", notes:"~41% acceptance. Soundness-based review. $1,395 APC"},
   {rank:12, name:"Cancer Causes & Control", publisher:"Springer", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/9100846", notes:"13 CRC KAP articles. 1 Saudi paper. Epidemiology focus"},
   {rank:13, name:"Eastern Mediterranean Health J", publisher:"WHO EMRO", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/9608387", notes:"Free. WHO-backed. Strong fit for EMR region KAP studies"},
   {rank:14, name:"Health Education Research", publisher:"Oxford Univ Press", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/8608459", notes:"Core scope = health education/behavior change. MEDLINE since 1986"},
-  {rank:15, name:"Current Oncology", publisher:"MDPI", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/9479064", notes:"Published Saudi cancer screening barriers. MEDLINE confirmed"},
-  {rank:16, name:"Cancers", publisher:"MDPI", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101526829", notes:"IF 4.4. Broad cancer scope. MEDLINE indexed. High throughput"},
+  {rank:15, name:"Current Oncology", publisher:"MDPI", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/9502503", notes:"Published Saudi cancer screening barriers. MEDLINE confirmed"},
+  {rank:16, name:"European J Cancer Prevention", publisher:"Wolters Kluwer", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/9300837", notes:"Cancer prevention & screening scope. Official ECP Organisation journal"},
   {rank:17, name:"BMC Health Services Research", publisher:"Springer Nature", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101088677", notes:"Screening uptake barriers. Soundness-based review"},
   {rank:18, name:"BMC Gastroenterology", publisher:"Springer Nature", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/100968547", notes:"GI screening focus. Soundness-based review"},
   {rank:19, name:"J Community Health", publisher:"Springer", tier:2, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/7600747", notes:"Community screening studies. MEDLINE since 1975"},
@@ -678,12 +676,12 @@ const journals = [
   {rank:22, name:"J Epidemiology & Global Health", publisher:"Springer Nature", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101596317", notes:"IF 3.1. Global health framing needed. MEDLINE indexed"},
   {rank:23, name:"J Gastrointestinal Cancer", publisher:"Springer", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101479627", notes:"Moderate fit. GI cancer focus. Screening barriers angle"},
   {rank:24, name:"J Health Population and Nutrition", publisher:"Springer Nature", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/100942132", notes:"Open access. Developing country focus. MEDLINE indexed"},
-  {rank:25, name:"Cancer Management and Research", publisher:"Dove Press (T&F)", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101512700", notes:"Broad cancer management including prevention"},
+  {rank:25, name:"Journal of Medical Screening", publisher:"SAGE", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/9433359", notes:"Screening methodology focus. Niche and selective (~37 articles/year)"},
   {rank:26, name:"BMC Medical Education", publisher:"Springer Nature", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101088679", notes:"If study includes HCP knowledge component. Soundness-based"},
   {rank:27, name:"J Racial and Ethnic Health Disparities", publisher:"Springer", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101628476", notes:"7 CRC KAP articles. Requires disparities framing"},
   {rank:28, name:"J Public Health (Springer)", publisher:"Springer", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101188638", notes:"Published CRC colonoscopy barriers review 2025"},
   {rank:29, name:"Preventive Medicine", publisher:"Elsevier", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/0322116", notes:"8 CRC KAP articles. More selective. High-quality needed"},
-  {rank:30, name:"Translational Behavioral Medicine", publisher:"Oxford Univ Press", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101554473", notes:"5 CRC KAP articles. Behavioral science focus"}
+  {rank:30, name:"Translational Behavioral Medicine", publisher:"Oxford Univ Press", tier:3, url:"https://www.ncbi.nlm.nih.gov/nlmcatalog/101554668", notes:"5 CRC KAP articles. Behavioral science focus"}
 ];
 
 // ===== Render Table =====
