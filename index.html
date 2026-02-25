@@ -354,6 +354,8 @@ td.rank {
   color: var(--text-muted);
 }
 td.journal-name { font-weight: 600; min-width: 180px; }
+td.journal-name a { color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--border); transition: all var(--transition); }
+td.journal-name a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 td.publisher { color: var(--text-muted); white-space: nowrap; }
 td.indexing {
   white-space: nowrap;
@@ -448,36 +450,6 @@ tbody tr[data-tier="4"] td:first-child { box-shadow: inset 4px 0 0 var(--tier4);
   margin: -0.3rem 0;
 }
 
-/* ===== Avoid List ===== */
-.avoid-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 0.75rem;
-}
-.avoid-card {
-  display: flex;
-  gap: 0.75rem;
-  padding: 1rem 1.25rem;
-  background: var(--avoid-bg);
-  border: 1px solid var(--avoid-border);
-  border-radius: var(--radius-sm);
-  align-items: flex-start;
-}
-.avoid-icon {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--avoid);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-.avoid-info h4 { font-size: 0.88rem; font-weight: 700; color: var(--avoid); }
-.avoid-info p { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem; }
 
 /* ===== Stats Bar ===== */
 .stats-bar {
@@ -525,7 +497,6 @@ footer a { color: var(--accent); text-decoration: none; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   thead th, tbody td { padding: 0.6rem 0.65rem; font-size: 0.8rem; }
   td.notes { max-width: 200px; }
-  .avoid-grid { grid-template-columns: 1fr; }
 }
 
 /* ===== Animations ===== */
@@ -575,7 +546,6 @@ footer a { color: var(--accent); text-decoration: none; }
     <a href="#overview" class="nav-link active">Overview</a>
     <a href="#rankings" class="nav-link">Top 30 Rankings</a>
     <a href="#cascade" class="nav-link">Submission Cascade</a>
-    <a href="#avoid" class="nav-link">Journals to Avoid</a>
   </div>
 </nav>
 
@@ -596,10 +566,6 @@ footer a { color: var(--accent); text-decoration: none; }
       <div class="stat-card">
         <div class="stat-value" style="color: var(--tier2);">4</div>
         <div class="stat-label">Cascade Tiers</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" style="color: var(--avoid);">10</div>
-        <div class="stat-label">Journals to Avoid</div>
       </div>
     </div>
 
@@ -714,19 +680,6 @@ footer a { color: var(--accent); text-decoration: none; }
     </div>
   </section>
 
-  <!-- Avoid -->
-  <section id="avoid" class="section animate-in delay-3">
-    <div class="section-header">
-      <div class="section-icon" style="background: var(--avoid-bg); color: var(--avoid);">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-      </div>
-      <h2>Journals to Avoid</h2>
-    </div>
-    <p class="section-desc">These journals were excluded due to user preference, delisting, reputation concerns, or scope mismatch.</p>
-
-    <div class="avoid-grid" id="avoidGrid">
-    </div>
-  </section>
 
 </main>
 
@@ -738,49 +691,36 @@ footer a { color: var(--accent); text-decoration: none; }
 <script>
 // ===== Data =====
 const journals = [
-  {rank:1, name:"Medicine (Baltimore)", publisher:"Wolters Kluwer", indexing:"MEDLINE", tier:1, notes:"Mega-journal. ~80% acceptance rate. Publishes everything methodologically sound. Descriptive KAP = fine"},
-  {rank:2, name:"SAGE Open Medicine", publisher:"SAGE", indexing:"PMC", tier:1, notes:"Explicit policy: \u201cnot assessed on perceived impact.\u201d Reputable publisher. Very high acceptance"},
-  {rank:3, name:"Health Science Reports", publisher:"Wiley", indexing:"PMC", tier:1, notes:"Explicit policy: \u201cnot assessed on novelty or perceived impact.\u201d Published CRC KAP 2025"},
-  {rank:4, name:"Healthcare (Basel)", publisher:"MDPI", indexing:"PMC", tier:1, notes:"Very high acceptance rate. Published CRC screening from Asir 2025. Fast turnaround"},
-  {rank:5, name:"Medicina", publisher:"MDPI", indexing:"MEDLINE", tier:1, notes:"17 days median to first decision. Q1 General Medicine. High acceptance"},
-  {rank:6, name:"J Multidisciplinary Healthcare", publisher:"Dove Press (T&F)", indexing:"PMC", tier:1, notes:"Published near-identical Saudi CRC barriers study 2024. Fast review"},
-  {rank:7, name:"J Family Medicine & Primary Care", publisher:"Wolters Kluwer", indexing:"PMC", tier:1, notes:"Very high volume of KAP from Middle East. Fast review cycle"},
-  {rank:8, name:"Annals of Medicine and Surgery", publisher:"Wolters Kluwer", indexing:"PMC", tier:1, notes:"High acceptance rate. Broad scope. Cross-sectional surveys welcome"},
-  {rank:9, name:"Int\u2019l J General Medicine", publisher:"Dove Press (T&F)", indexing:"PMC", tier:1, notes:"Broad scope. Accepts KAP/community surveys readily"},
-  {rank:10, name:"Qatar Medical Journal", publisher:"QScience", indexing:"PMC", tier:2, notes:"Free. Gulf journal. Small journal = less competition"},
-  {rank:11, name:"Clinical Epidemiology & Global Health", publisher:"Elsevier", indexing:"PubMed", tier:2, notes:"KAP/cross-sectional = core article type. Developing country focus"},
-  {rank:12, name:"J Cancer Education", publisher:"Springer", indexing:"MEDLINE", tier:2, notes:"Core mission = cancer awareness/education. Perfect scope match"},
-  {rank:13, name:"Cancer Control", publisher:"SAGE", indexing:"MEDLINE", tier:2, notes:"Cancer prevention mission. Moffitt Cancer Center journal"},
-  {rank:14, name:"J Patient Experience", publisher:"SAGE", indexing:"PubMed", tier:2, notes:"Patient barriers to screening = natural fit. Reputable SAGE journal"},
-  {rank:15, name:"J Primary Care & Community Health", publisher:"SAGE", indexing:"PMC", tier:2, notes:"Community screening surveys. SAGE Open Access"},
-  {rank:16, name:"Eastern Mediterranean Health J", publisher:"WHO EMRO", indexing:"MEDLINE", tier:2, notes:"Free. WHO-backed. Loves EMR region KAP studies"},
-  {rank:17, name:"PeerJ", publisher:"PeerJ", indexing:"PMC", tier:2, notes:"Methodology-focused review, not novelty. Fast turnaround"},
-  {rank:18, name:"Patient Preference and Adherence", publisher:"Dove Press (T&F)", indexing:"PMC", tier:2, notes:"Screening adherence/patient barriers = strong scope fit"},
-  {rank:19, name:"Risk Management & Healthcare Policy", publisher:"Dove Press (T&F)", indexing:"PMC", tier:3, notes:"Public health policy angle. Frame around screening policy"},
-  {rank:20, name:"Health Education Research", publisher:"Oxford Univ Press", indexing:"MEDLINE", tier:3, notes:"Core scope = health education/behavior change"},
-  {rank:21, name:"J Clinical Medicine", publisher:"MDPI", indexing:"MEDLINE", tier:3, notes:"Large journal. Broad clinical scope. High throughput"},
-  {rank:22, name:"Preventive Medicine Reports", publisher:"Elsevier", indexing:"PMC", tier:3, notes:"Prevention-focused OA. Accepts descriptive studies"},
-  {rank:23, name:"Current Oncology", publisher:"MDPI", indexing:"PMC", tier:3, notes:"Published Saudi cancer screening barriers. Oncology frame needed"},
-  {rank:24, name:"Frontiers in Public Health", publisher:"Frontiers", indexing:"PMC", tier:3, notes:"Published Saudi CRC barriers 2025. ~50% acceptance rate"},
-  {rank:25, name:"BMC Gastroenterology", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, notes:"GI screening awareness. May want more analytical depth"},
-  {rank:26, name:"BMC Public Health", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, notes:"Published Saudi CRC KAP 2025. May request regression analysis"},
-  {rank:27, name:"J Community Health", publisher:"Springer", indexing:"MEDLINE", tier:4, notes:"Community screening studies. Competitive"},
-  {rank:28, name:"J Gastrointestinal Cancer", publisher:"Springer", indexing:"MEDLINE", tier:4, notes:"Moderate fit for screening barriers"},
-  {rank:29, name:"BMJ Open", publisher:"BMJ", indexing:"MEDLINE", tier:4, notes:"Rigorous methods review. May flag convenience sampling. Stretch target"},
-  {rank:30, name:"J Epidemiology & Global Health", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, notes:"High IF (3.1). Would need strong global health framing. Stretch"}
-];
-
-const avoidList = [
-  {name:"Cureus", reason:"Per user request"},
-  {name:"All Saudi journals", reason:"Per user request"},
-  {name:"APJCP", reason:"Per user request"},
-  {name:"PLOS ONE", reason:"Per user request"},
-  {name:"IJERPH (MDPI)", reason:"Delisted from Web of Science, Feb 2023"},
-  {name:"Heliyon (Elsevier)", reason:"On Web of Science hold, Sep 2024"},
-  {name:"J Oncology (Hindawi)", reason:"Closed Sep 2024; delisted from WoS"},
-  {name:"World J Clinical Cases", reason:"Baishideng \u2014 Beall\u2019s list; reputation risk"},
-  {name:"Int\u2019l J Colorectal Disease", reason:"Scope mismatch; clinical/surgical journal"},
-  {name:"Arch Med Sci \u2013 Civilization Diseases", reason:"Journal suspended"}
+  {rank:1, name:"Medicine (Baltimore)", publisher:"Wolters Kluwer", indexing:"MEDLINE", tier:1, url:"https://journals.lww.com/md-journal/", notes:"Mega-journal. ~80% acceptance rate. Publishes everything methodologically sound. Descriptive KAP = fine"},
+  {rank:2, name:"SAGE Open Medicine", publisher:"SAGE", indexing:"PMC", tier:1, url:"https://journals.sagepub.com/home/smo", notes:"Explicit policy: \u201cnot assessed on perceived impact.\u201d Reputable publisher. Very high acceptance"},
+  {rank:3, name:"Health Science Reports", publisher:"Wiley", indexing:"PMC", tier:1, url:"https://onlinelibrary.wiley.com/journal/23988835", notes:"Explicit policy: \u201cnot assessed on novelty or perceived impact.\u201d Published CRC KAP 2025"},
+  {rank:4, name:"Healthcare (Basel)", publisher:"MDPI", indexing:"PMC", tier:1, url:"https://www.mdpi.com/journal/healthcare", notes:"Very high acceptance rate. Published CRC screening from Asir 2025. Fast turnaround"},
+  {rank:5, name:"Medicina", publisher:"MDPI", indexing:"MEDLINE", tier:1, url:"https://www.mdpi.com/journal/medicina", notes:"17 days median to first decision. Q1 General Medicine. High acceptance"},
+  {rank:6, name:"J Multidisciplinary Healthcare", publisher:"Dove Press (T&F)", indexing:"PMC", tier:1, url:"https://www.dovepress.com/journal-of-multidisciplinary-healthcare-journal", notes:"Published near-identical Saudi CRC barriers study 2024. Fast review"},
+  {rank:7, name:"J Family Medicine & Primary Care", publisher:"Wolters Kluwer", indexing:"PMC", tier:1, url:"https://journals.lww.com/jfmpc/", notes:"Very high volume of KAP from Middle East. Fast review cycle"},
+  {rank:8, name:"Annals of Medicine and Surgery", publisher:"Wolters Kluwer", indexing:"PMC", tier:1, url:"https://journals.lww.com/annals-of-medicine-and-surgery/", notes:"High acceptance rate. Broad scope. Cross-sectional surveys welcome"},
+  {rank:9, name:"Int\u2019l J General Medicine", publisher:"Dove Press (T&F)", indexing:"PMC", tier:1, url:"https://www.dovepress.com/international-journal-of-general-medicine-journal", notes:"Broad scope. Accepts KAP/community surveys readily"},
+  {rank:10, name:"Qatar Medical Journal", publisher:"QScience", indexing:"PMC", tier:2, url:"https://www.qscience.com/content/journals/qmj", notes:"Free. Gulf journal. Small journal = less competition"},
+  {rank:11, name:"Clinical Epidemiology & Global Health", publisher:"Elsevier", indexing:"PubMed", tier:2, url:"https://www.ceghonline.com/", notes:"KAP/cross-sectional = core article type. Developing country focus"},
+  {rank:12, name:"J Cancer Education", publisher:"Springer", indexing:"MEDLINE", tier:2, url:"https://link.springer.com/journal/13187", notes:"Core mission = cancer awareness/education. Perfect scope match"},
+  {rank:13, name:"Cancer Control", publisher:"SAGE", indexing:"MEDLINE", tier:2, url:"https://journals.sagepub.com/home/ccx", notes:"Cancer prevention mission. Moffitt Cancer Center journal"},
+  {rank:14, name:"J Patient Experience", publisher:"SAGE", indexing:"PubMed", tier:2, url:"https://journals.sagepub.com/home/jpx", notes:"Patient barriers to screening = natural fit. Reputable SAGE journal"},
+  {rank:15, name:"J Primary Care & Community Health", publisher:"SAGE", indexing:"PMC", tier:2, url:"https://journals.sagepub.com/home/jpc", notes:"Community screening surveys. SAGE Open Access"},
+  {rank:16, name:"Eastern Mediterranean Health J", publisher:"WHO EMRO", indexing:"MEDLINE", tier:2, url:"https://www.emro.who.int/emhj.html", notes:"Free. WHO-backed. Loves EMR region KAP studies"},
+  {rank:17, name:"PeerJ", publisher:"PeerJ", indexing:"PMC", tier:2, url:"https://peerj.com/", notes:"Methodology-focused review, not novelty. Fast turnaround"},
+  {rank:18, name:"Patient Preference and Adherence", publisher:"Dove Press (T&F)", indexing:"PMC", tier:2, url:"https://www.dovepress.com/patient-preference-and-adherence-journal", notes:"Screening adherence/patient barriers = strong scope fit"},
+  {rank:19, name:"Risk Management & Healthcare Policy", publisher:"Dove Press (T&F)", indexing:"PMC", tier:3, url:"https://www.dovepress.com/risk-management-and-healthcare-policy-journal", notes:"Public health policy angle. Frame around screening policy"},
+  {rank:20, name:"Health Education Research", publisher:"Oxford Univ Press", indexing:"MEDLINE", tier:3, url:"https://academic.oup.com/her", notes:"Core scope = health education/behavior change"},
+  {rank:21, name:"J Clinical Medicine", publisher:"MDPI", indexing:"MEDLINE", tier:3, url:"https://www.mdpi.com/journal/jcm", notes:"Large journal. Broad clinical scope. High throughput"},
+  {rank:22, name:"Preventive Medicine Reports", publisher:"Elsevier", indexing:"PMC", tier:3, url:"https://www.sciencedirect.com/journal/preventive-medicine-reports", notes:"Prevention-focused OA. Accepts descriptive studies"},
+  {rank:23, name:"Current Oncology", publisher:"MDPI", indexing:"PMC", tier:3, url:"https://www.mdpi.com/journal/curroncol", notes:"Published Saudi cancer screening barriers. Oncology frame needed"},
+  {rank:24, name:"Frontiers in Public Health", publisher:"Frontiers", indexing:"PMC", tier:3, url:"https://www.frontiersin.org/journals/public-health", notes:"Published Saudi CRC barriers 2025. ~50% acceptance rate"},
+  {rank:25, name:"BMC Gastroenterology", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, url:"https://bmcgastroenterol.biomedcentral.com/", notes:"GI screening awareness. May want more analytical depth"},
+  {rank:26, name:"BMC Public Health", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, url:"https://bmcpublichealth.biomedcentral.com/", notes:"Published Saudi CRC KAP 2025. May request regression analysis"},
+  {rank:27, name:"J Community Health", publisher:"Springer", indexing:"MEDLINE", tier:4, url:"https://link.springer.com/journal/10900", notes:"Community screening studies. Competitive"},
+  {rank:28, name:"J Gastrointestinal Cancer", publisher:"Springer", indexing:"MEDLINE", tier:4, url:"https://link.springer.com/journal/12029", notes:"Moderate fit for screening barriers"},
+  {rank:29, name:"BMJ Open", publisher:"BMJ", indexing:"MEDLINE", tier:4, url:"https://bmjopen.bmj.com/", notes:"Rigorous methods review. May flag convenience sampling. Stretch target"},
+  {rank:30, name:"J Epidemiology & Global Health", publisher:"Springer Nature", indexing:"MEDLINE", tier:4, url:"https://link.springer.com/journal/44197", notes:"High IF (3.1). Would need strong global health framing. Stretch"}
 ];
 
 // ===== Render Table =====
@@ -789,25 +729,11 @@ function renderTable(data) {
   tbody.innerHTML = data.map(j => `
     <tr data-tier="${j.tier}">
       <td class="rank">${j.rank}</td>
-      <td class="journal-name">${j.name}</td>
+      <td class="journal-name"><a href="${j.url}" target="_blank" rel="noopener">${j.name}</a></td>
       <td class="publisher">${j.publisher}</td>
       <td class="indexing"><span class="badge badge-${j.indexing.toLowerCase().replace(/\s/g,'')}">${j.indexing}</span></td>
       <td class="notes">${j.notes}</td>
     </tr>
-  `).join('');
-}
-
-// ===== Render Avoid =====
-function renderAvoid() {
-  const grid = document.getElementById('avoidGrid');
-  grid.innerHTML = avoidList.map(a => `
-    <div class="avoid-card">
-      <div class="avoid-icon">&times;</div>
-      <div class="avoid-info">
-        <h4>${a.name}</h4>
-        <p>${a.reason}</p>
-      </div>
-    </div>
   `).join('');
 }
 
@@ -909,7 +835,6 @@ sections.forEach(s => observer.observe(s));
 
 // ===== Init =====
 renderTable(journals);
-renderAvoid();
 </script>
 
 </body>
